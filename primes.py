@@ -20,9 +20,9 @@ class PrimeClass(object):
 			return False
 		
 		prime_num = True
-		for i in range(2, num_int):
+		for count in range(2, num_int):
 			# If the division module is zero, then it is not prime.
-			if (num_int % i) == 0:
+			if (num_int % count) == 0:
 				prime_num = False
 				break
 		return prime_num
