@@ -5,7 +5,7 @@
 
 		/* Se Crea Tabla Employee */
 	CREATE TABLE EMPLOYEE(
-		ID_EMPLOYEE		integer NOT NULL,		/* ID_EMPLOYEE: CORRESPONDE AL PRIMARE KEY		*/
+		ID				integer NOT NULL,		/* ID_EMPLOYEE: CORRESPONDE AL PRIMARE KEY		*/
 		ID_DEPARTMENT	integer NOT NULL,		/* ID_DEPARTMENT: CORRESPONDE AL FOREIGN KEY	*/
 		FIRST_NAME		varchar(50) NULL,
 		LAST_NAME		varchar(50) NULL,
@@ -13,14 +13,14 @@
 	
 		/* Se Crea Tabla Employee_Department */
 	CREATE TABLE EMPLOYEE_DEPARTMENT(
-		ID_DEPARTMENT	integer NOT NULL,		/* ID_DEPARTMENT: CORRESPONDE AL PRIMARE KEY	*/
+		ID				integer NOT NULL,		/* ID_DEPARTMENT: CORRESPONDE AL PRIMARE KEY	*/
 		NAME			varchar(50) NULL,
 		DESCRIPTION		varchar(150) NULL,
 	CONSTRAINT PK_EMPLOYEE_DEPARTMENT PRIMARY KEY (ID_DEPARTMENT) );
 	
 		/* Se Crea Tabla Employee_Hobby															*/
 	CREATE TABLE EMPLOYEE_HOBBY(
-		ID_HOBBY		integer NOT NULL,		/* ID_HOBBY: CORRESPONDE AL PRIMARY KEY			*/
+		ID				integer NOT NULL,		/* ID_HOBBY: CORRESPONDE AL PRIMARY KEY			*/
 		NAME			varchar(50) NULL,
 		DESCRIPTION		varchar(150) NULL,
 	CONSTRAINT PK_EEMPLOYEE_HOBBY PRIMARY KEY (ID_HOBBY) );
@@ -36,18 +36,18 @@
 		/* Se hace la modificacion a la tabla EMPLOYEE  para asignarle el Deparment				*/
 	ALTER TABLE EMPLOYEE
 		ADD CONSTRAINT FK_EMPLOYEE_TO_DEPARTMENT FOREIGN KEY(ID_DEPARTMENT)
-		REFERENCES EMPLOYEE_DEPARTMENT (ID_DEPARTMENT)
+		REFERENCES EMPLOYEE_DEPARTMENT (ID)
 		on delete restrict on update restrict;
 
 		/* Se hacen las modificaciones necesarias a la tabla EMPLOYEE_HAS_HOBBY					*/
 	ALTER TABLE EMPLOYEE_HAS_HOBBY
 		ADD CONSTRAINT FK_EMPLOYEE_HAS_HOBBY_EMPLOYEE FOREIGN KEY(ID_EMPLOYEE)
-		REFERENCES EMPLOYEE (ID_EMPLOYEE)
+		REFERENCES EMPLOYEE (ID)
 		on delete restrict on update restrict;
 		
 	ALTER TABLE EMPLOYEE_HAS_HOBBY
 		ADD CONSTRAINT FK_EMPLOYEE_HAS_HOBBY_EMPLOYEE_HOBBY FOREIGN KEY(ID_EMPLOYEE_HOBBY)
-		REFERENCES EMPLOYEE_HOBBY (ID_HOBBY)
+		REFERENCES EMPLOYEE_HOBBY (ID)
 		on delete restrict on update restrict;
 		
 		/* INSERCIÓN DE DATOS EN LA BASE DE DATOS												*/
@@ -100,16 +100,7 @@
 		values (7, 40, 300 );
 		
 		/* Sql 3:
-		 * Como la tabla de Empleado está sufriendo una Modificación y ya tiene datos,			*
-		 * lo ideal sería exportar los datos en un .CSV sin cabecera, esto permite				*
-		 * hacer una Copia de seguridad de la Data que ya se encuentra en la Tabla EMPLOYEE.	*
-		 * La copia de Seguridad de Datos es para tener un punto de restauración de datos...	*/
-		 
-		 /* Primero Hacemos respaldo de la Tabla EMPLOYEE 										*/
-	COPY EMPLOYEE( "ID_EMPLOYEE", "ID_DEPARTMENT", "FIRST_NAME", "LAST_NAME" )
-		TO ‘C:\Temp\EMPLOYEE.csv’ delimiters ‘;’;
-	
-		/* Se hace la Modificación a la Tabla EMPLOYEE para Agregarle un JEFE					*/
+		 * Se hace la Modificación a la Tabla EMPLOYEE para Agregarle un JEFE					*/
 	ALTER TABLE EMPLOYEE ADD COLUMN ID_BOSS integer NULL;
 							/* ID_BOSS: CORRESPONDE AL ID_EMPLOYEE PARA ASIGNAR UN BOSS (Jefe)	*
 							 * Este campo se agrega al final de la Tabla EMPLOYEE				*/
