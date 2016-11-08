@@ -108,13 +108,13 @@
 		/* Ahora asignamos la Relación del Empleado con su JEFE									*/
 	ALTER TABLE EMPLOYEE
 		ADD CONSTRAINT FK_EMPLOYEE_HAS_BOSS FOREIGN KEY(ID_BOSS)
-		REFERENCES EMPLOYEE (ID_EMPLOYEE)
+		REFERENCES EMPLOYEE (ID)
 		on delete restrict on update restrict;
 	
 		/* Le asignamos vía Updtae de Tabla el Jefe a cada Empleado								*/
-	UPDATE EMPLOYEE SET ID_BOSS = 10 WHERE ID_EMPLOYEE IN ( 20, 30 );	/* Los empleados de ID 20 y 30 tienen como JEFE		*
-																		 * Al Empleado 10...								*/
+	UPDATE EMPLOYEE SET ID_BOSS = 10 WHERE ID IN ( 20, 30 );	/* Los empleados de ID 20 y 30 tienen como JEFE		*
+																 * Al Empleado 10...								*/
 																		 
-	UPDATE EMPLOYEE SET ID_BOSS = 20 WHERE ID_EMPLOYEE 	= 40;			/* El Empleado de ID 40 tienen como JEFE al			*
-																		 * Empleado 20...									*/
+	UPDATE EMPLOYEE SET ID_BOSS = 20 WHERE ID 	= 40;			/* El Empleado de ID 40 tienen como JEFE al			*
+																 * Empleado 20...									*/
 -- ...
