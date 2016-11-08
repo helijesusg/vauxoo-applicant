@@ -28,10 +28,9 @@
 		/* Como corresponde a una Relación de Muchos a Muchos... es necesario tener una
 		   tabla de relación entre el EMPLOYEE y EMPLOYEE_HOBBY									*/
 	CREATE TABLE EMPLOYEE_HAS_HOBBY (
-		ID_HAS_HOBBY	integer NOT NULL,		/* ID_HAS_HOBBY: CORRESPONDE AL PRIMARY KEY		*/
 		ID_EMPLOYEE		integer,
-		ID_EMPLOYEE_HOBBY	integer,
-	CONSTRAINT PK_EMPLOYEE_HAS_HOBBY PRIMARY KEY (ID_HAS_HOBBY) );
+		ID_HOBBY		integer,
+	CONSTRAINT PK_EMPLOYEE_HAS_HOBBY PRIMARY KEY (ID_EMPLOYEE, ID_HOBBY) );
 	
 		/* Se hace la modificacion a la tabla EMPLOYEE  para asignarle el Deparment				*/
 	ALTER TABLE EMPLOYEE
@@ -46,7 +45,7 @@
 		on delete restrict on update restrict;
 		
 	ALTER TABLE EMPLOYEE_HAS_HOBBY
-		ADD CONSTRAINT FK_EMPLOYEE_HAS_HOBBY_EMPLOYEE_HOBBY FOREIGN KEY(ID_EMPLOYEE_HOBBY)
+		ADD CONSTRAINT FK_EMPLOYEE_HAS_HOBBY_EMPLOYEE_HOBBY FOREIGN KEY(ID_HOBBY)
 		REFERENCES EMPLOYEE_HOBBY (ID)
 		on delete restrict on update restrict;
 		
@@ -84,20 +83,20 @@
 		values (300, 'AJEDREZ', 'JUGAR AJEDREZ' );
 		
 		/* Se inserta datos a la tabla de EMPLOYEE_HAS_HOBBY									*/
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (1, 10, 100 );
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (2, 10, 300 );
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (3, 20, 200 );
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (4, 30, 100 );
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (5, 30, 200 );
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (6, 40, 100 );
-	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
-		values (7, 40, 300 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (10, 100 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (10, 300 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (20, 200 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (30, 100 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (30, 200 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (40, 100 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_EMPLOYEE, ID_HOBBY )
+		values (40, 300 );
 		
 		/* Sql 3:
 		 * Se hace la Modificación a la Tabla EMPLOYEE para Agregarle un JEFE					*/
