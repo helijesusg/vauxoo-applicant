@@ -14,11 +14,9 @@ class PrimeClass(object):
 		"""
 		This is a method that returns TRUE if the number received how to
 		parameter is prime, FALSE otherwise.
-		"""
-		
+		"""		
 		if num_int <= 1:
 			return False
-		
 		prime_num = True
 		for count in range(2, num_int):
 			# If the division module is zero, then it is not prime.
