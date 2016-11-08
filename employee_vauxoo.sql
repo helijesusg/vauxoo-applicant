@@ -98,4 +98,32 @@
 		values (6, 40, 100 );
 	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
 		values (7, 40, 300 );
+		
+		/* Sql 3:
+		 * Como la tabla de Empleado está sufriendo una Modificación y ya tiene datos,			*
+		 * lo ideal sería exportar los datos en un .CSV sin cabecera, esto permite				*
+		 * hacer una Copia de seguridad de la Data que ya se encuentra en la Tabla EMPLOYEE.	*
+		 * La copia de Seguridad de Datos es para tener un punto de restauración de datos...	*/
+		 
+		 /* Primero Hacemos respaldo de la Tabla EMPLOYEE 										*/
+	COPY EMPLOYEE( "ID_EMPLOYEE", "ID_DEPARTMENT", "FIRST_NAME", "LAST_NAME" )
+		TO ‘C:\Temp\EMPLOYEE.csv’ delimiters ‘;’;
+	
+		/* Se hace la Modificación a la Tabla EMPLOYEE para Agregarle un JEFE					*/
+	ALTER TABLE EMPLOYEE ADD COLUMN ID_BOSS int NULL;
+							/* ID_BOSS: CORRESPONDE AL ID_EMPLOYEE PARA ASIGNAR UN BOSS (Jefe)	*
+							 * Este campo se agrega al final de la Tabla EMPLOYEE				*/
+													 
+		/* Ahora asignamos la Relación del Empleado con su JEFE									*/
+	ALTER TABLE EMPLOYEE
+		ADD CONSTRAINT FK_EMPLOYEE_HAS_BOSS FOREIGN KEY(ID_BOSS)
+		REFERENCES EMPLOYEE (ID_EMPLOYEE)
+		on delete restrict on update restrict;
+	
+		/* Le asignamos vía Updtae de Tabla el Jefe a cada Empleado								*/
+	UPDATE EMPLOYEE SET ID_BOSS = 10 WHERE ID_EMPLOYEE IN ( 20, 30 );	/* Los empleados de ID 20 y 30 tienen como JEFE		*
+																		 * Al Empleado 10...								*/
+																		 
+	UPDATE EMPLOYEE SET ID_BOSS = 20 WHERE ID_EMPLOYEE 	= 40;			/* El Empleado de ID 40 tienen como JEFE al			*
+																		 * Empleado 20...									*/
 -- ...
