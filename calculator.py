@@ -14,6 +14,6 @@ class CalculatorClass(object):
 		Method to sum the list of numbers that is received in num_list
 		"""
 		sum = 0
-		for i in range(0, len(num_list)):
-			sum += num_list[i]
+		for count in range(0, len(num_list)):
+			sum += num_list[count]
 		return sum
