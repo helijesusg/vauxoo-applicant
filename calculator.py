@@ -12,7 +12,7 @@ class CalculatorClass(object):
 		"""
 		Method to sum the list of numbers that is received in num_list
 		"""
-		sum = 0
+		varsum = 0
 		for count in range(0, len(num_list)):
-			sum += num_list[count]
-		return sum
+			varsum += num_list[count]
+		return varsum
