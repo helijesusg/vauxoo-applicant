@@ -23,14 +23,14 @@
 		ID_HOBBY		integer NOT NULL,		/* ID_HOBBY: CORRESPONDE AL PRIMARY KEY			*/
 		NAME			varchar(50) NULL,
 		DESCRIPTION		varchar(150) NULL,
-	CONSTRAINT PK_EMPLOYEE_DEPARTMENT PRIMARY KEY (ID_DEPARTMENT) );
+	CONSTRAINT PK_EEMPLOYEE_HOBBY PRIMARY KEY (ID_HOBBY) );
 	
 		/* Como corresponde a una Relación de Muchos a Muchos... es necesario tener una
 		   tabla de relación entre el EMPLOYEE y EMPLOYEE_HOBBY									*/
 	CREATE TABLE EMPLOYEE_HAS_HOBBY (
 		ID_HAS_HOBBY	integer NOT NULL,		/* ID_HAS_HOBBY: CORRESPONDE AL PRIMARY KEY		*/
-		ID_EMPLOYEE		int,
-		ID_EMPLOYEE_HOBBY	int,
+		ID_EMPLOYEE		integer,
+		ID_EMPLOYEE_HOBBY	integer,
 	CONSTRAINT PK_EMPLOYEE_HAS_HOBBY PRIMARY KEY (ID_HAS_HOBBY) );
 	
 		/* Se hace la modificacion a la tabla EMPLOYEE  para asignarle el Deparment				*/
@@ -110,7 +110,7 @@
 		TO ‘C:\Temp\EMPLOYEE.csv’ delimiters ‘;’;
 	
 		/* Se hace la Modificación a la Tabla EMPLOYEE para Agregarle un JEFE					*/
-	ALTER TABLE EMPLOYEE ADD COLUMN ID_BOSS int NULL;
+	ALTER TABLE EMPLOYEE ADD COLUMN ID_BOSS integer NULL;
 							/* ID_BOSS: CORRESPONDE AL ID_EMPLOYEE PARA ASIGNAR UN BOSS (Jefe)	*
 							 * Este campo se agrega al final de la Tabla EMPLOYEE				*/
 													 
