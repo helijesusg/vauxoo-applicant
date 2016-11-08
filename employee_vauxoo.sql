@@ -18,12 +18,37 @@
 		DESCRIPTION		varchar(150) NULL,
 	CONSTRAINT PK_EMPLOYEE_DEPARTMENT PRIMARY KEY (ID_DEPARTMENT) );
 	
+		/* Se Crea Tabla Employee_Hobby															*/
+	CREATE TABLE EMPLOYEE_HOBBY(
+		ID_HOBBY		integer NOT NULL,		/* ID_HOBBY: CORRESPONDE AL PRIMARY KEY			*/
+		NAME			varchar(50) NULL,
+		DESCRIPTION		varchar(150) NULL,
+	CONSTRAINT PK_EMPLOYEE_DEPARTMENT PRIMARY KEY (ID_DEPARTMENT) );
+	
+		/* Como corresponde a una Relación de Muchos a Muchos... es necesario tener una
+		   tabla de relación entre el EMPLOYEE y EMPLOYEE_HOBBY									*/
+	CREATE TABLE EMPLOYEE_HAS_HOBBY (
+		ID_HAS_HOBBY	integer NOT NULL,		/* ID_HAS_HOBBY: CORRESPONDE AL PRIMARY KEY		*/
+		ID_EMPLOYEE		int,
+		ID_EMPLOYEE_HOBBY	int,
+	CONSTRAINT PK_EMPLOYEE_HAS_HOBBY PRIMARY KEY (ID_HAS_HOBBY) );
+	
 		/* Se hace la modificacion a la tabla EMPLOYEE  para asignarle el Deparment				*/
 	ALTER TABLE EMPLOYEE
 		ADD CONSTRAINT FK_EMPLOYEE_TO_DEPARTMENT FOREIGN KEY(ID_DEPARTMENT)
 		REFERENCES EMPLOYEE_DEPARTMENT (ID_DEPARTMENT)
 		on delete restrict on update restrict;
 
+		/* Se hacen las modificaciones necesarias a la tabla EMPLOYEE_HAS_HOBBY					*/
+	ALTER TABLE EMPLOYEE_HAS_HOBBY
+		ADD CONSTRAINT FK_EMPLOYEE_HAS_HOBBY_EMPLOYEE FOREIGN KEY(ID_EMPLOYEE)
+		REFERENCES EMPLOYEE (ID_EMPLOYEE)
+		on delete restrict on update restrict;
+		
+	ALTER TABLE EMPLOYEE_HAS_HOBBY
+		ADD CONSTRAINT FK_EMPLOYEE_HAS_HOBBY_EMPLOYEE_HOBBY FOREIGN KEY(ID_EMPLOYEE_HOBBY)
+		REFERENCES EMPLOYEE_HOBBY (ID_HOBBY)
+		on delete restrict on update restrict;
 		
 		/* INSERCIÓN DE DATOS EN LA BASE DE DATOS												*/
 		/* Se inserta datos a la tabla de EMPLOYEE_DEPARTMENT									*/
@@ -49,4 +74,28 @@
 		values (30, 20, 'VERONICA', 'ARIAS' );
 	insert into EMPLOYEE ( ID_EMPLOYEE, ID_DEPARTMENT, FIRST_NAME, LAST_NAME )
 		values (40, 60, 'PABLO', 'PEREZ' );
+	
+		/* Se inserta datos a la tabla de EMPLOYEE_HOBBY										*/
+	insert into EMPLOYEE_HOBBY ( ID_HOBBY, NAME, DESCRIPTION )
+		values (100, 'BAILAR', 'PRACTICAR BAILE' );
+	insert into EMPLOYEE_HOBBY ( ID_HOBBY, NAME, DESCRIPTION )
+		values (200, 'DEPORTE', 'HACER DEPORTE COMO ACTIVIDAD RECREATIVA' );
+	insert into EMPLOYEE_HOBBY ( ID_HOBBY, NAME, DESCRIPTION )
+		values (300, 'AJEDREZ', 'JUGAR AJEDREZ' );
+		
+		/* Se inserta datos a la tabla de EMPLOYEE_HAS_HOBBY									*/
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (1, 10, 100 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (2, 10, 300 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (3, 20, 200 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (4, 30, 100 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (5, 30, 200 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (6, 40, 100 );
+	insert into EMPLOYEE_HAS_HOBBY ( ID_HAS_HOBBY, ID_EMPLOYEE, ID_EMPLOYEE_HOBBY )
+		values (7, 40, 300 );
 -- ...
